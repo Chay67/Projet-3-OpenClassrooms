@@ -1,4 +1,5 @@
 const apiBaseUrl = "http://localhost:5678/api" // URL de base de l'API
+let works = [] // Liste des travaux
 /**
  * Récupérer la liste des travaux via l'API
  * 1. Créer une fonction asynchrone qui s'appelera getWorks
@@ -52,7 +53,7 @@ const generateWorkCard = (work) => {
   const img = document.createElement("img");
   img.src = work.imageUrl;
   img.alt = work.title;
-  
+
   const figcaption = document.createElement("figcaption");
   figcaption.textContent = work.title;
 
@@ -60,7 +61,7 @@ const generateWorkCard = (work) => {
   figure.appendChild(figcaption);
 
   return figure;
-}  
+}
 
 /**
  * Générer et ajouter au DOM les cartes de travaux par rapport aux données de l'API
@@ -70,15 +71,73 @@ const generateWorkCard = (work) => {
  * 4. Ajouter la carte de travail au DOM
  */
 
-const displayWorks = async () => {
-  const works = await getWorks();
+const displayWorks = async (data) => {
+  if ((!works || !works.length) && !data) {
+    works = await getWorks();
+  }
+
   const gallery = document.querySelector(".gallery");
 
   gallery.innerHTML = ""; // Vider le contenu existant de la galerie
 
-  works.forEach(work => {
-    const workCard = generateWorkCard(work);
-    gallery.appendChild(workCard);
+  if (data) {
+    data.forEach(work => {
+      const workCard = generateWorkCard(work);
+      gallery.appendChild(workCard);
+    });
+  } else {
+    works.forEach(work => {
+      const workCard = generateWorkCard(work);
+      gallery.appendChild(workCard);
+    });
+  }
+}
+
+/**
+ * Générer et ajouter au DOM les filtres de catégories par rapport aux données de l'API
+ * 1. Récupérer la liste des catégories via l'API
+ * 2. Récupérer l'élément parent dans lequel on va ajouter les filtres de catégories
+ * 3. Pour chaque catégorie, créer un filtre de catégorie
+ * 4. Ajouter le filtre de catégorie au DOM
+ */
+
+const generateCategoryFilter = (category, all) => {
+  const button = document.createElement("button");
+  button.classList.add("filter-button");
+  if (all) {
+    button.classList.add("active");
+  }
+
+  button.textContent = all ? "Tous" : category.name;
+
+  button.addEventListener("click", async () => {
+    const filterButtons = document.querySelectorAll(".filter-button");
+    filterButtons.forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    if (all) {
+      displayWorks();
+      return;
+    }
+
+    const filteredWorks = works.filter(work => work.categoryId === category.id);
+    displayWorks(filteredWorks);
+  })
+
+  return button;
+}
+
+const displayCategoryFilters = async () => {
+  const categories = await getCategories();
+  const filtersContainer = document.querySelector(".filters");
+
+  filtersContainer.innerHTML = ""; // Vider le contenu existant des filtres
+  filtersContainer.appendChild(generateCategoryFilter(null, true));
+
+  categories.forEach(category => {
+    const categoryFilter = generateCategoryFilter(category);
+    filtersContainer.appendChild(categoryFilter);
   });
 }
 
@@ -95,6 +154,5 @@ const displayWorks = async () => {
 
 
 
-
-
 displayWorks();
+displayCategoryFilters();
