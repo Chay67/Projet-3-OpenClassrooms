@@ -127,6 +127,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 /** end reset css**/
 body {
   /* max-width: 1140px; */
@@ -182,6 +187,12 @@ nav li {
   padding: 0 10px;
   font-size: 1.2em;
 }
+
+nav li img {
+  width: 20px;
+  height: 20px;
+}
+
 nav li a {
   text-decoration: none;
   color: black;
