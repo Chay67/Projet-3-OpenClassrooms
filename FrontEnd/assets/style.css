@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -105,17 +106,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -123,6 +128,7 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -145,6 +151,16 @@ body {
   background-color: #fffef8;
 }
 
+.edition-header {
+  background-color: black;
+  font-family: "Work Sans";
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
 header {
   display: flex;
   max-width: 1140px;
@@ -152,6 +168,7 @@ header {
   justify-content: space-between;
   margin: 50px auto;
 }
+
 section {
   margin: 50px 0;
 }
@@ -165,7 +182,7 @@ h1 {
   color: #b1663c;
 }
 
-h1 > span {
+h1>span {
   font-family: "Work Sans";
   font-size: 10px;
   letter-spacing: 0.1em;
@@ -183,6 +200,7 @@ nav ul {
   align-items: center;
   list-style-type: none;
 }
+
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
@@ -193,9 +211,15 @@ nav li img {
   height: 20px;
 }
 
-nav li a {
+nav li a,
+nav li button {
   text-decoration: none;
   color: black;
+  background: transparent;
+  font-family: "Work Sans";
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 nav li a.active {
@@ -203,7 +227,8 @@ nav li a.active {
 }
 
 li:hover,
-li a:hover {
+li a:hover,
+li button:hover {
   color: #b1663c;
 }
 
@@ -217,9 +242,11 @@ main {
   display: flex;
   align-items: center;
 }
+
 #introduction figure {
   flex: 1;
 }
+
 #introduction img {
   display: block;
   margin: auto;
@@ -229,6 +256,7 @@ main {
 #introduction article {
   flex: 1;
 }
+
 #introduction h2 {
   margin-bottom: 1em;
 }
@@ -236,6 +264,7 @@ main {
 #introduction p {
   margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
   text-align: center;
   margin-bottom: 1em;
@@ -285,16 +314,20 @@ main {
 .gallery img {
   width: 100%;
 }
+
 #contact {
   width: 50%;
   margin: auto;
 }
-#contact > * {
+
+#contact>* {
   text-align: center;
 }
+
 #contact h2 {
   margin-bottom: 20px;
 }
+
 #contact form {
   text-align: left;
   margin-top: 30px;
@@ -308,9 +341,11 @@ main {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
   margin: 2em 0 1em 0;
 }
+
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
