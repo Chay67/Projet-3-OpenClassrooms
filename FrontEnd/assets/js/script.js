@@ -1,9 +1,10 @@
 const apiBaseUrl = "http://localhost:5678/api" // URL de base de l'API
 let works = [] // Liste des travaux
+let workCategories = [] // Liste des catégories de travaux
 
 // Vérifie si un token existe dans le sessionStorage
-const isLoggedIn = !!sessionStorage.getItem("token") || false;
-const sessionToken = sessionStorage.getItem("token") || null;
+let isLoggedIn = !!sessionStorage.getItem("token") || false;
+let sessionToken = sessionStorage.getItem("token") || null;
 
 console.log("isLoggedIn:", isLoggedIn);
 console.log("sessionToken:", sessionToken);
@@ -138,6 +139,9 @@ const generateCategoryFilter = (category, all) => {
 
 const displayCategoryFilters = async () => {
   const categories = await getCategories();
+
+  workCategories = categories;
+
   const filtersContainer = document.querySelector(".filters");
 
   filtersContainer.innerHTML = ""; // Vider le contenu existant des filtres
@@ -153,13 +157,20 @@ if (isLoggedIn) {
   const loginButtonContainer = document.getElementById("loginButtonContainer");
   const loginButton = document.querySelector("#loginButtonContainer>a")
   loginButton.style.display = "none"; // Cacher le bouton de connexion
+
   const logoutButton = document.createElement("button");
   logoutButton.textContent = "logout";
   logoutButton.addEventListener("click", () => {
+
     sessionStorage.removeItem("token");
-  loginButton.style.display = "block"; // Afficher le bouton de connexion
-  logoutButton.remove(); // Supprimer le bouton de déconnexion
+
+    isLoggedIn = false;
+    sessionToken = null;
+
+    loginButton.style.display = "block"; // Afficher le bouton de connexion
+    logoutButton.remove(); // Supprimer le bouton de déconnexion
   });
+  
   loginButtonContainer.appendChild(logoutButton);
 }
 
@@ -176,3 +187,6 @@ if (isLoggedIn) {
 
 displayWorks();
 displayCategoryFilters();
+
+// Export the variables 
+export { apiBaseUrl, isLoggedIn, sessionToken, works, workCategories }
