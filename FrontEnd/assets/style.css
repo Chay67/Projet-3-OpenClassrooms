@@ -155,7 +155,7 @@ body {
   background-color: black;
   font-family: "Work Sans";
   color: white;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   padding: 20px 0;
@@ -283,7 +283,7 @@ main {
 }
 
 .edition {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
   position: absolute;
@@ -301,7 +301,7 @@ main {
 
 .modal-container {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

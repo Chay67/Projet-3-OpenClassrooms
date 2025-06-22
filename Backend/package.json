@@ -1,7 +1,7 @@
 {
   "name": "dwf-projet6-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "Ce dossier contient le code backend du projet",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -24,5 +24,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "keywords": []
 }

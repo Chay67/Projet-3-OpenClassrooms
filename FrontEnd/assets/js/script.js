@@ -153,6 +153,19 @@ const displayCategoryFilters = async () => {
   });
 }
 
+const toggleEditionMode = (state) => {
+  const editionHeader = document.getElementById("editionHeader");
+
+  const editionButton = document.getElementById("editButton");
+  if (state) {
+    editionHeader.style.display = "flex"; // Afficher l'en-tête d'édition
+    editionButton.style.display = "flex"; // Afficher le bouton d'édition
+  } else {
+    editionHeader.style.display = "none"; // Cacher l'en-tête d'édition
+    editionButton.style.display = "none"; // Cacher le bouton d'édition
+  }
+}
+
 if (isLoggedIn) {
   const loginButtonContainer = document.getElementById("loginButtonContainer");
   const loginButton = document.querySelector("#loginButtonContainer>a")
@@ -169,11 +182,12 @@ if (isLoggedIn) {
 
     loginButton.style.display = "block"; // Afficher le bouton de connexion
     logoutButton.remove(); // Supprimer le bouton de déconnexion
+    toggleEditionMode(false); // Désactiver le mode édition
   });
-  
-  loginButtonContainer.appendChild(logoutButton);
-}
 
+  loginButtonContainer.appendChild(logoutButton);
+  toggleEditionMode(true); // Activer le mode édition
+}
 
 
 
