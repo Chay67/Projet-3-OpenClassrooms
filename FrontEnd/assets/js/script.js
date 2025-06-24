@@ -80,8 +80,8 @@ const generateWorkCard = (work) => {
  * 4. Ajouter la carte de travail au DOM
  */
 
-const displayWorks = async (data) => {
-  if ((!works || !works.length) && !data) {
+const displayWorks = async (data, requestAll = false) => {
+  if (requestAll || ((!works || !works.length) && !data)) {
     works = await getWorks();
   }
 
@@ -203,4 +203,4 @@ displayWorks();
 displayCategoryFilters();
 
 // Export the variables 
-export { apiBaseUrl, isLoggedIn, sessionToken, works, workCategories }
+export { apiBaseUrl, isLoggedIn, sessionToken, works, workCategories, displayWorks }

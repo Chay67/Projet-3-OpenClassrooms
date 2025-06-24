@@ -59,8 +59,8 @@
       <div class="portfolio-header">
         <h2>Mes Projets</h2>
         <button class="edition" id="editButton">
-          <img src="./assets/icons/edit black.svg" alt="icon d'édition">
-          <p>modifier</p>
+          <img src="./assets/icons/edit-black.svg" alt="icon d'édition">
+          modifier
         </button>
       </div>
       <div class="filters"></div>
@@ -110,23 +110,39 @@
 
   <div id="addWorkModalContainer" class="modal-container">
     <div class="modal">
-      <button id="returnToEditionModal" class="modal-back"><img src="./assets/icons/left-arrow.svg" alt="return"></button>
+      <button id="returnToEditionModal" class="modal-back"><img src="./assets/icons/left-arrow.svg"
+          alt="return"></button>
       <button id="closeAddWorkModal" class="modal-close">&times;</button>
       <h3>Ajout photo</h3>
-      <form class="modal-form">
+      <form id="addWorkForm" class="modal-form">
         <div class="modal-form-header">
           <div class="modal-form-header-content">
             <img src="./assets/icons/image-preview.svg" alt="image preview">
             <label for="image">
-              <input type="file" name="image" id="image" accept="image/*">
+              <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
               <span>+ Ajouter photo</span>
             </label>
             <p>jpg, png : 4mo max</p>
           </div>
         </div>
 
-        <div class="modal-separator"></div>
-        <button class="modal-add_work-button">Valider</button>
+        <div class="modal-form-content">
+          <label>Titre
+            <input type="text" name="title" id="title" required />
+          </label>
+
+          <label>Catégorie
+            <select name="category" id="category" required>
+              <option value="">Sélectionnez une catégorie</option>
+            </select>
+          </label>
+
+        </div>
+
+        <p id="addWordErrorMessage" class="error-message"></p>
+
+        <div id="addModalSeparator" class="modal-separator"></div>
+        <button type="submit" id="validButton" class="modal-add_work-button" disabled>Valider</button>
       </form>
     </div>
   </div>
