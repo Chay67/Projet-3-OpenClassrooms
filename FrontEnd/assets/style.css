@@ -657,3 +657,16 @@ footer nav ul {
   padding-top: 20px;
   color: red;
 }
+
+body.edition-mode #portfolio .portfolio-header {
+  margin-top: 140px;
+  margin-bottom: 92px;
+}
+
+body.edition-mode #portfolio .portfolio-header h2.portfolio {
+  margin-bottom: 0; 
+}
+
+body.edition-mode #portfolio .filters {
+  display: none; 
+}

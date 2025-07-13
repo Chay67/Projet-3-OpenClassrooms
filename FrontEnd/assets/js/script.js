@@ -170,6 +170,8 @@ const toggleEditionMode = (state) => {
 }
 
 if (isLoggedIn) {
+  document.body.classList.add("edition-mode"); 
+  
   const loginButtonContainer = document.getElementById("loginButtonContainer");
   const loginButton = document.querySelector("#loginButtonContainer>a")
   loginButton.style.display = "none"; // Cacher le bouton de connexion
