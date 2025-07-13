@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         const email = emailInput.value.trim();
-        const password = passwordInput.value;
+        const password = passwordInput.value.trim();
 
         if (email === "" || password === "") {
             errorMessage.textContent = "Veuillez remplir tous les champs requis.";

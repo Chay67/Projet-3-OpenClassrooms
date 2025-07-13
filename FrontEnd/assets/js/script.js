@@ -155,14 +155,17 @@ const displayCategoryFilters = async () => {
 
 const toggleEditionMode = (state) => {
   const editionHeader = document.getElementById("editionHeader");
-
   const editionButton = document.getElementById("editButton");
+  const filters = document.querySelector(".filters");
+
   if (state) {
     editionHeader.style.display = "flex"; // Afficher l'en-tête d'édition
     editionButton.style.display = "flex"; // Afficher le bouton d'édition
+    filters.style.display = "none"; // Cacher les filtres de catégories en mode édition
   } else {
     editionHeader.style.display = "none"; // Cacher l'en-tête d'édition
     editionButton.style.display = "none"; // Cacher le bouton d'édition
+    filters.style.display = "flex"; // Afficher les filtres de catégories en mode normal
   }
 }
 

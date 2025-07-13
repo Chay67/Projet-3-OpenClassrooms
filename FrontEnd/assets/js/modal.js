@@ -140,6 +140,7 @@ if (isLoggedIn) {
         category: null
     }
 
+
     const imageInput = document.getElementById("image");
     const titleInput = document.getElementById("title");
     const categoryInput = document.getElementById("category");
@@ -152,27 +153,24 @@ if (isLoggedIn) {
     const addWorkErrorMessage = document.getElementById("addWordErrorMessage");
 
     const handleChange = (key, value) => {
-        data[key] = value;
+        const trimmedValue = typeof value === "string" ? value.trim() : value;
+        data[key] = trimmedValue;
 
-        if (data.title.length && data.image && data.category) {
-            if (validationButton.getAttribute("disabled")) {
-                validationButton.removeAttribute("disabled");
-            }
+        if (data.title && data.image && data.category) {
+            validationButton.removeAttribute("disabled");
         } else {
-            if (!validationButton.getAttribute("disabled")) {
-                validationButton.setAttribute("disabled", true);
-            }
+            validationButton.setAttribute("disabled", true);
         }
     }
 
-    imageInput.addEventListener("change", (event) => {
+    const imageInputHandler = (event) => {
         const file = event.target.files[0];
-
-        // Si l'image est supérieur à 4Mo ou n'est pas de type jpg / png alors on affiche l'erreur
         const maxSize = 4194304;
 
         addWorkErrorMessage.style.display = "none";
         addWorkErrorMessage.textContent = "";
+
+        if (!file) return;
 
         if (file.size > maxSize) {
             addWorkErrorMessage.style.display = "block";
@@ -180,7 +178,7 @@ if (isLoggedIn) {
             return;
         }
 
-        if (!file || !['image/jpeg', 'image/png'].includes(file.type)) {
+        if (!['image/jpeg', 'image/png'].includes(file.type)) {
             addWorkErrorMessage.style.display = "block";
             addWorkErrorMessage.textContent = "Veuillez sélectionner une image de type JPG ou PNG";
             return;
@@ -197,9 +195,11 @@ if (isLoggedIn) {
         imagePreview.setAttribute("alt", "image preview");
 
         modalFormHeaderContent.appendChild(imagePreview);
-    });
+    };
 
-    titleInput.addEventListener("keyup", (event) => handleChange("title", event.target.value));
+    imageInput.addEventListener("change", imageInputHandler);
+
+    titleInput.addEventListener("keyup", (event) => handleChange("title", event.target.value.trim()));
 
     categoryInput.addEventListener("change", (event) => handleChange("category", event.target.value));
 
@@ -211,6 +211,7 @@ if (isLoggedIn) {
         modalFormHeaderContent.classList.remove("selected");
         modalFormHeaderContent.parentElement.classList.remove("selected");
         modalFormHeaderContent.innerHTML = modalFormHeaderContentCopy.innerHTML;
+        document.getElementById("image").addEventListener("change", imageInputHandler);
 
         validationButton.setAttribute("disabled", true);
 
@@ -236,7 +237,7 @@ if (isLoggedIn) {
             return;
         }
 
-        if (!data.title.length) {
+        if (!data.title.trim().length) {
             addWorkErrorMessage.style.display = "block";
             addWorkErrorMessage.textContent = "Veuillez entrer un titre pour votre photo";
             return;
@@ -262,6 +263,7 @@ if (isLoggedIn) {
         }).then(response => {
             if (response.ok) {
                 clearForm();
+                fillModalGallery();
             } else {
                 addWorkErrorMessage.style.display = "block";
                 addWorkErrorMessage.textContent = "Une erreur est survenue lors de l'ajout de votre photo";
